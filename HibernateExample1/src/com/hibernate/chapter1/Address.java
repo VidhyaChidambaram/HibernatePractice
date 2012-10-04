@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 public class Address {
 
 	/**
-	 * Value of streetNumber
+	 * Value of streetNumber local commit
 	 */
 	private String streetNumber;
 	/**
