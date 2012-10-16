@@ -7,12 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.NaturalIdCache;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
 @SelectBeforeUpdate(value=true)
+@NamedQuery(name="College.byId", query="from College where collegeName = :collegeName")
+@NamedNativeQuery(name="College.byName", query="select * from TESTSCHEMA.College where collegeId>7", resultClass=College.class)
 public class College {
 
 	private int collegeId;
@@ -57,6 +62,5 @@ public class College {
 	public void setCollegeStudents(List<Student> collegeStudents) {
 		this.collegeStudents = collegeStudents;
 	}
-	
 	
 }

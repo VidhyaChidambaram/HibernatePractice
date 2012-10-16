@@ -1,7 +1,6 @@
 package com.hibernate.chapter1;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class Module extends Project{

@@ -27,16 +27,34 @@ public class TestCollegeHQL {
 		
 		// avoid sql injection : What is sql injection hacking? suppose you append queryString at end of query, hacker can modify your query string and extract data.
 		// So, use placeholder like ? or :parameterBinding to avoid sql injection hacking
-		Query query = session.createQuery("from College where collegeName like :collegeName");
-		query.setString("collegeName", "%"+"Col"+"%");
-		query.setMaxResults(10);
+		//Query query = session.createQuery("from College where collegeName like :collegeName");
+		//query.setString("collegeName", "%"+"Col"+"%");
+		//query.setMaxResults(10);
 		
+		session.getTransaction().commit();
+		session.close();
+		
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.getNamedQuery("College.byId");
+		query.setString("collegeName", "Coll4");
+		
+		Query nativeQuery = session.getNamedQuery("College.byName");
+		
+		
+		@SuppressWarnings("unchecked")
+		List<College> nativeList = (List<College>) nativeQuery.list();
+		@SuppressWarnings("unchecked")
 		List<College> list = (List<College>)query.list();
 		session.getTransaction().commit();
 		session.close();
 		
-		for(College collegeName : list) {
-			System.out.println("User name is"+ collegeName.getCollegeName());
+		for(College collegeId : list) {
+			System.out.println("CollegeId is"+ collegeId.getCollegeId());
+		}
+		
+		for(College collegeName : nativeList) {
+			System.out.println("College name is"+ collegeName.getCollegeName());
 		}
 		
 	}

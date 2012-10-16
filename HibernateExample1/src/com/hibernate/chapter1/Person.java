@@ -1,5 +1,6 @@
 package com.hibernate.chapter1;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage=org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE)
 public class Person {
 
 	private String personName;
